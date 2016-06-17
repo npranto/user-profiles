@@ -26,7 +26,7 @@ module.exports = {
 		for (var i = 0; i < users.length; i++) {
 			if(users[i].name === req.body.name){
 				if (users[i].password === req.body.password) {
-					req.session.currentUser = req.body;
+					req.session.currentUser = users[i];
 					return res.status(200).send({
 						userFound: true
 					})

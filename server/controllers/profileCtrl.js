@@ -23,9 +23,18 @@ var profiles = [
 
 module.exports = {
 	getProfiles(req, res, next){
+    let friendsReturn = [];
+    let currUser = req.session.currentUser.friends;
+    for (var i = 0; i < currUser.length; i++) {
+      for (var j = 0; j < profiles.length; j++) {
+        if (currUser[i] === profiles[j].name) {
+          friendsReturn.push(profiles[j]);
+        }
+      }
+    }
 		res.status(200).send({
 			currentUser: req.session.currentUser,
-  			friends: profiles
+  			friends: friendsReturn
 		})
 	}
 }
